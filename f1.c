@@ -1,7 +1,14 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include<unistd.h>
-#include <string.h>
+#include <stdarg.h>
+
+
+/**
+ * _putchar - prints a single character to the stdout
+ * @c: A character to print to the stdout
+ *
+ * Return: A status code.
+ */
 
 int _putchar(char c)
 {
@@ -9,34 +16,50 @@ int _putchar(char c)
 }
 
 
+/**
+ * _printf - A function that behaves as printf
+ * @format: A string of what to print
+ *
+ * Return: The number of printed characters
+ */
+
 int _printf(const char *format, ...)
 {
-	int str_len;
-	int i;
+	int i, j;
+	char *s;
+	va_list args;
 
-	str_len = strlen(format);
-	for (i = 0; i < str_len; i++)
-		_putchar(format[i]);
-	
-	return (str_len);
-}
-
-
-int main(void)
-{
-	/*int len;
-	len = printf("012%5d\n",1);
-	printf("The length of the string = %d\n", len);*/
-
-	/*int len;
-	len = write(1, "Mina is learning about %d the write command", 30);
-	printf("\nThe length of the string = %d\n", len);*/
-
-	int len, len2;
-	
-	len = _printf("Let's try to printf a simple sentence.\n");
-    len2 = printf("Let's try to printf a simple sentence.\n");
-	printf("Length:[%d, %i]\n", len, len);
-	printf("Length:[%d, %i]\n", len2, len2);
-
+	va_start(args, format);
+	i = 0;
+	if (format == NULL)
+		return (0);
+	while (format[i] != '\0')
+	{
+		if (format[i] != '%')
+		{
+			_putchar(format[i]);
+			i++;
+		}
+		else
+		{
+			i++;
+			switch (format[i])
+			{
+				case 'c':
+					_putchar(va_arg(args, int));
+					break;
+				case 's':
+					s = va_arg(args, char *);
+					for (j = 0; s[j]; j++)
+						_putchar(s[j]);
+					break;
+				case '%':
+					_putchar('%');
+					break;
+			}
+			i++;
+		}
+	}
+	va_end(args);
+	return (i - 1);
 }
