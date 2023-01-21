@@ -32,4 +32,11 @@ int main(void)
 	len = write(1, "Mina is learning about %d the write command", 30);
 	printf("\nThe length of the string = %d\n", len);*/
 
+	int len, len2;
+	
+	len = _printf("Let's try to printf a simple sentence.\n");
+    len2 = printf("Let's try to printf a simple sentence.\n");
+	printf("Length:[%d, %i]\n", len, len);
+	printf("Length:[%d, %i]\n", len2, len2);
+
 }
