@@ -53,6 +53,8 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					s = va_arg(args, char *);
+					if (s == NULL)
+						s = "(null)";
 					for (j = 0; s[j]; j++)
 					{
 						_putchar(s[j]);
