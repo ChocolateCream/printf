@@ -27,6 +27,7 @@ int _printf(const char *format, ...)
 {
 	int i, j, count;
 	char *s;
+	char n_str[100];
 	va_list args;
 
 	va_start(args, format);
@@ -64,6 +65,22 @@ int _printf(const char *format, ...)
 				case '%':
 					_putchar('%');
 					count++;
+					break;
+				case 'd':
+					sprintf(n_str, "%d", va_arg(args, int));
+					for (j = 0; n_str[j]; j++)
+					{
+						_putchar(n_str[j]);
+						count++;
+					}
+					break;
+				case 'i':
+					sprintf(n_str, "%i", va_arg(args, int));
+					for (j = 0; n_str[j]; j++)
+					{
+						_putchar(n_str[j]);
+						count++;
+					}
 					break;
 			}
 			i++;
